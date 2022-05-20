@@ -8,6 +8,7 @@ public class ApiShopBookApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ApiShopBookApplication.class, args);
+
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.api_shop_book.controllers;
 
 import com.example.api_shop_book.helper.BookHelper;
 import com.example.api_shop_book.model.Book;
+import com.example.api_shop_book.services.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,12 +21,14 @@ import java.util.List;
 @RequestMapping("/api/public/books")
 public class PublicController {
     private final BookHelper bookHelper;
+    private final BookService bookService;
 
     @GetMapping("/all")
     public ResponseEntity<List<Book>> getAllBook() {
-        return  bookHelper.getAllBook();
+        return bookHelper.getAllBook();
     }
-//    @GetMapping("posts/all")
+
+    //    @GetMapping("posts/all")
 //    public ResponseEntity<List<Post>> getAllPost() {
 //        return  postHelper.getAllPost();
 //    }
@@ -34,11 +37,21 @@ public class PublicController {
 //    public ResponseEntity<?> getAllPostDetail() {
 //        return  postHelper.getAllPostDetail();
 //    }
-//    @GetMapping("/books/{id}")
-//    public ResponseEntity<Book> getBookById(@PathVariable("id") Integer id) {
-//        return bookHelper.getById(id);
+    @GetMapping("/find/{id}")
+    public ResponseEntity<Book> getBookById(@PathVariable("id") Integer id) {
+        return bookHelper.getBookById(id);
+    }
+//    @GetMapping("/find/{name}")
+//    public ResponseEntity<Book> getBookBy(@PathVariable("name") String name) {
+//        Book book = bookService.getName(name);
+//        if (book != null) {
+//            return ResponseEntity.ok(book);
+//        }
+//        return null;
 //    }
-//    @GetMapping("/posts/{id}")
+//        return bookHelper.getBookByName(name);
+//    }
+    //    @GetMapping("/posts/{id}")
 //    public ResponseEntity<Post> getPostById(@PathVariable("id") Integer id) {
 //        return postHelper.getById(id);
 //    }
