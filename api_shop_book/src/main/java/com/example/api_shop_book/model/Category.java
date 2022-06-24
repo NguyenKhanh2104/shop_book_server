@@ -8,15 +8,11 @@ import java.util.Set;
 @Table(name = "category")
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
     @Column(name = "name")
     private String name;
-
-    @OneToMany(mappedBy = "category")
-    private Set<Book> books = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -34,12 +30,6 @@ public class Category {
         this.name = name;
     }
 
-    public Set<Book> getBooks() {
-        return books;
-    }
 
-    public void setBooks(Set<Book> books) {
-        this.books = books;
-    }
 
 }

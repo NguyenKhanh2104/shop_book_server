@@ -1,6 +1,5 @@
 package com.example.api_shop_book.services;
 
-import com.example.api_shop_book.exception.BookNotFoundException;
 import com.example.api_shop_book.model.Book;
 import com.example.api_shop_book.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,9 +15,14 @@ public class BookService {
     private final BookRepository bookRepo;
 
 
-    public Book getById(Integer id) {
-        return bookRepo.findById(id).orElse(null);
+    public Book getBookId(Integer bookId) throws Exception {
+        return bookRepo.findById(bookId).orElseThrow(() ->new Exception("Book is not found"));
     }
+//    public List<Book> getBookResponse(){
+//        List<Book> posts = bookRepo.findAll();
+//        bookRepo.
+//        return posts;
+//    }
 public Book getName(String name) {
     Optional<Book> u = Optional.ofNullable(bookRepo.finBookByname(name));
         return u.get();
@@ -26,7 +30,9 @@ public Book getName(String name) {
 //    public Book addBook(Book book) {
 //        return bookRepo.save(book);
 //    }
-
+public Book getBookById(Integer bookId) throws Exception {
+    return bookRepo.findById(bookId).orElseThrow(() ->new Exception("Book is not found"));
+}
     public List<Book> findAllBook() {
         return bookRepo.findAll();
     }
