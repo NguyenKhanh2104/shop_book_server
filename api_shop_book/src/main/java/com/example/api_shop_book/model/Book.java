@@ -1,6 +1,5 @@
 package com.example.api_shop_book.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 

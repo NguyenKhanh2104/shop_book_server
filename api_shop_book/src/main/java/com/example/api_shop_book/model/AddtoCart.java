@@ -39,4 +39,8 @@ public class AddtoCart {
     public String getImg() {
         return book.getImg();
     }
+
+    public int updateQty(int add) {
+        return qty+=add;
+    }
 }

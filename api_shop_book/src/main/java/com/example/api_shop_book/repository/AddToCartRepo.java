@@ -18,6 +18,8 @@ public interface AddToCartRepo extends JpaRepository<AddtoCart,Long> {
 	double getTotalAmountByUserId(@Param("user_id")Integer user_id);
 	@Query("Select addCart  FROM AddtoCart addCart WHERE addCart.user_id=:user_id")
 	List<AddtoCart> getCartByuserId(@Param("user_id")Integer user_id);
+	@Query("Select addCart  FROM AddtoCart addCart WHERE addCart.book.id=:book_id")
+	AddtoCart getCartByBookId(@Param("book_id")Integer book_id);
 	@Query("Select addCart  FROM AddtoCart addCart ")
 	Optional<AddtoCart> getCartByuserIdtest();
 	@Query("Select addCart  FROM AddtoCart addCart WHERE addCart.book.id= :book_id and addCart.user_id=:user_id")
@@ -30,7 +32,7 @@ public interface AddToCartRepo extends JpaRepository<AddtoCart,Long> {
     @Transactional
 	@Query("DELETE  FROM AddtoCart addCart WHERE   addCart.user_id=:user_id")
 	void deleteAllCartByUserId(@Param("user_id")Integer user_id);
-	
+
 	@Modifying
     @Transactional
 	@Query("DELETE  FROM AddtoCart addCart WHERE addCart.user_id=:user_id")
@@ -39,5 +41,9 @@ public interface AddToCartRepo extends JpaRepository<AddtoCart,Long> {
     @Transactional
 	@Query("update AddtoCart addCart set addCart.qty=:qty,addCart.price=:price WHERE addCart.id=:cart_id")
 	void updateQtyByCartId(@Param("cart_id")Long cart_id,@Param("price")double price,@Param("qty")Integer qty);
-	
+	@Modifying
+	@Transactional
+	@Query("update AddtoCart addCart set addCart.qty=:qty,addCart.price=:price WHERE addCart.book.id=:book_id")
+	void updateQtyByBookId(@Param("book_id")Integer book_id,@Param("price")double price,@Param("qty")Integer qty);
+
 }
