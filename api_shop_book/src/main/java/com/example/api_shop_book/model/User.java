@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Getter
@@ -36,6 +33,25 @@ public class User {
     @Column(name = "phone", length = 10)
     private String phone;
 
+
+    @Column(name = "fullname")
+    private String fullname;
+
+    @Column(name = "img")
+    private String img;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "birthday")
+    private Date birthday;
+
+    @Column(name = "sex")
+    private String sex;
+
+    @Column(name = "position")
+    private String position;
+
     @ManyToMany
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -52,6 +68,40 @@ public class User {
 
     }
 
+    public User(String username, String password, String email, String phone, String fullname, String img, String address, Date birthday, String sex, String position) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.fullname = fullname;
+        this.img = img;
+        this.address = address;
+        this.birthday = birthday;
+        this.sex = sex;
+        this.position = position;
+    }
 
+    public User(Integer id, String email, String phone, String fullname, String address, Date birthday) {
+        this.id = id;
+        this.email = email;
+        this.phone = phone;
+        this.fullname = fullname;
+        this.address = address;
+        this.birthday = birthday;
+    }
 
+    public User(Integer id, String email, String phone, String fullname, String address) {
+        this.id = id;
+        this.email = email;
+        this.phone = phone;
+        this.fullname = fullname;
+        this.address = address;
+    }
+
+    public User(Integer id, String fullname, String email, String phone) {
+        this.id = id;
+        this.fullname = fullname;
+        this.email = email;
+        this.phone = phone;
+    }
 }

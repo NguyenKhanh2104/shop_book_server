@@ -2,6 +2,7 @@ package com.example.api_shop_book.controllers;
 
 import com.example.api_shop_book.dto.BookDTO;
 import com.example.api_shop_book.helper.BookHelper;
+import com.example.api_shop_book.helper.UserHelper;
 import com.example.api_shop_book.model.AddtoCart;
 import com.example.api_shop_book.payload.response.ApiResponse;
 import com.example.api_shop_book.security.jwt.ShoppingConfiguration;
@@ -11,6 +12,7 @@ import com.example.api_shop_book.services.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -31,8 +33,8 @@ public class PublicController {
     @GetMapping("/allBook")
     public List<BookDTO> getAllBook() {
         return bookHelper.getAllBook();
+//        return userHelper.getAllUser();
     }
-
     @GetMapping("/find/{id}")
     public ResponseEntity<BookDTO> getBookById(@PathVariable("id") Integer id) throws Exception {
         return bookHelper.getBookById(id);
