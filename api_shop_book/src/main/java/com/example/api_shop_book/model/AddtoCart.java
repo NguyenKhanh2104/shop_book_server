@@ -22,16 +22,15 @@ public class AddtoCart {
     @JoinColumn(name = "book_id")
     Book book;
 
-
     int qty;
     double price;
     Integer user_id;
     @Column(updatable = false, insertable = false)
     String added_date;
     @Transient
-    String bookName;
-    @Transient
     String img;
+    @Transient
+    String bookName;
     public String getBookName() {
         return book.getName();
     }

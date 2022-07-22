@@ -1,4 +1,4 @@
-package com.example.api_shop_book.services;
+package com.example.api_shop_book.services.Impl;
 
 import com.example.api_shop_book.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;

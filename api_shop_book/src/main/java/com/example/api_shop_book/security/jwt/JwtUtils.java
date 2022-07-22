@@ -1,6 +1,6 @@
 package com.example.api_shop_book.security.jwt;
 
-import com.example.api_shop_book.services.UserDetailsImpl;
+import com.example.api_shop_book.services.Impl.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

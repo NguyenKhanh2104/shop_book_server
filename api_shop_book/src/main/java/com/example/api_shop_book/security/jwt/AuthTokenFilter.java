@@ -1,6 +1,6 @@
 package com.example.api_shop_book.security.jwt;
 
-import com.example.api_shop_book.services.UserDetailsServiceImpl;
+import com.example.api_shop_book.services.Impl.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

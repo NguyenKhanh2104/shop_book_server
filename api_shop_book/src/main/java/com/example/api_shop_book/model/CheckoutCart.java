@@ -12,14 +12,13 @@ import javax.persistence.*;
 @Table(name="checkout")
 public class CheckoutCart {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	Integer id;
 	String order_id,payment_type,delivery_address;
 	Integer user_id;
 	@OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "book_id")
 	Book book;
-	//long ;
 	int qty;
 	double price;
 	@Column(updatable=false, insertable=false)

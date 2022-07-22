@@ -1,4 +1,4 @@
-package com.example.api_shop_book.services;
+package com.example.api_shop_book.services.Impl;
 
 import com.example.api_shop_book.model.User;
 import com.example.api_shop_book.repository.UserRepository;
@@ -8,8 +8,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.nio.file.attribute.UserPrincipal;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

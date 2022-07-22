@@ -1,13 +1,13 @@
 package com.example.api_shop_book.controllers;
 
+import com.example.api_shop_book.dto.BookDTO;
 import com.example.api_shop_book.helper.BookHelper;
 import com.example.api_shop_book.model.AddtoCart;
-import com.example.api_shop_book.model.Book;
 import com.example.api_shop_book.payload.response.ApiResponse;
 import com.example.api_shop_book.security.jwt.ShoppingConfiguration;
-import com.example.api_shop_book.services.BookService;
+import com.example.api_shop_book.services.CheckoutService;
+import com.example.api_shop_book.services.Impl.BookServiceImpl;
 import com.example.api_shop_book.services.CartService;
-import com.example.api_shop_book.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,85 +18,25 @@ import java.util.*;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/public/books")
+//@RequestMapping("/api/public/books")
+@RequestMapping("/api/public/")
 public class PublicController {
     private final BookHelper bookHelper;
     @Autowired
     CartService cartService;
     @Autowired
-    private BookService bookService;
-
+    private BookServiceImpl bookService;
     @Autowired
-    private UserService userService;
-    @GetMapping("/all")
-    public ResponseEntity<?> getAllBook() {
+    CheckoutService checkoutService;
+    @GetMapping("/allBook")
+    public List<BookDTO> getAllBook() {
         return bookHelper.getAllBook();
     }
 
-
-
     @GetMapping("/find/{id}")
-    public ResponseEntity<Book> getBookById(@PathVariable("id") Integer id) throws Exception {
+    public ResponseEntity<BookDTO> getBookById(@PathVariable("id") Integer id) throws Exception {
         return bookHelper.getBookById(id);
     }
-
-    @RequestMapping("addProduct")
-    public ResponseEntity<?> addCartwithProduct(@RequestBody HashMap<String,String> addCartRequest) {
-        try {
-            String keys[] = {"bookId","userId","qty","price"};
-            if(ShoppingConfiguration.validationWithHashMap(keys, addCartRequest)) {
-
-            }
-            Integer bookId = Integer.parseInt(addCartRequest.get("bookId"));
-            Integer userId =  Integer.parseInt(addCartRequest.get("userId"));
-            int qty =  Integer.parseInt(addCartRequest.get("qty"));
-            double price = Double.parseDouble(addCartRequest.get("price"));
-
-            List<AddtoCart> obj = cartService.addCartbyUserIdAndBookId(bookId,userId,qty,price);
-            return ResponseEntity.ok(obj);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.badRequest().body(new ApiResponse(e.getMessage(), ""));
-        }
-
-    }
-
-    @RequestMapping("updateQtyForCart")
-    public ResponseEntity<?> updateQtyForCart(@RequestBody HashMap<String,String> addCartRequest) {
-        try {
-            String keys[] = {"cartId","userId","qty","price"};
-            if(ShoppingConfiguration.validationWithHashMap(keys, addCartRequest)) {
-
-            }
-            long cartId = Long.parseLong(addCartRequest.get("cartId"));
-            Integer userId =  Integer.parseInt(addCartRequest.get("userId"));
-            int qty =  Integer.parseInt(addCartRequest.get("qty"));
-            double price = Double.parseDouble(addCartRequest.get("price"));
-            cartService.updateQtyByCartId(cartId, qty, price);
-            List<AddtoCart> obj = cartService.getCartByUserId(userId);
-            return ResponseEntity.ok(obj);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.badRequest().body(new ApiResponse(e.getMessage(), ""));
-        }
-
-    }
-
-
-    @RequestMapping("removeProductFromCart")
-    public ResponseEntity<?> removeCartwithProductId(@RequestBody HashMap<String,String> removeCartRequest) {
-        try {
-            String keys[] = {"userId","cartId"};
-            if(ShoppingConfiguration.validationWithHashMap(keys, removeCartRequest)) {
-
-            }
-            List<AddtoCart> obj = cartService.removeCartByUserId(Long.parseLong(removeCartRequest.get("cartId")), Integer.parseInt(removeCartRequest.get("userId")));
-            return ResponseEntity.ok(obj);
-        }catch(Exception e) {
-            return ResponseEntity.badRequest().body(new ApiResponse(e.getMessage(), ""));
-        }
-    }
-
     @RequestMapping("getCartsByUserId")
     public ResponseEntity<?> getCartsByUserId(@RequestBody HashMap<String,String> getCartRequest) {
         try {
@@ -109,6 +49,7 @@ public class PublicController {
             return ResponseEntity.badRequest().body(new ApiResponse(e.getMessage(), ""));
         }
     }
+
 //
 //    @PostMapping("/add")
 //    public ResponseEntity<?> addPost(@RequestBody Book book) {

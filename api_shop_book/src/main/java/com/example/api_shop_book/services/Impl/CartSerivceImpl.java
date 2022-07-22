@@ -1,4 +1,4 @@
-package com.example.api_shop_book.services;
+package com.example.api_shop_book.services.Impl;
 
 import java.util.List;
 
@@ -6,7 +6,8 @@ import com.example.api_shop_book.model.AddtoCart;
 import com.example.api_shop_book.model.Book;
 import com.example.api_shop_book.model.CheckoutCart;
 import com.example.api_shop_book.repository.AddToCartRepo;
-import com.example.api_shop_book.repository.CheckoutRepo;
+import com.example.api_shop_book.repository.CheckoutRepository;
+import com.example.api_shop_book.services.CartService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,9 @@ public class CartSerivceImpl implements CartService {
     @Autowired
     AddToCartRepo addCartRepo;
     @Autowired
-    CheckoutRepo checkOutRepo;
+    CheckoutRepository checkOutRepo;
     @Autowired
-    BookService bookService;
+    BookServiceImpl bookService;
     private static final Logger logger = LoggerFactory.getLogger(CartSerivceImpl.class);
 
     @Override

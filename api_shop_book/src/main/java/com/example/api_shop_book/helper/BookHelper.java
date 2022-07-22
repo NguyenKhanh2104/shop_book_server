@@ -1,41 +1,50 @@
 package com.example.api_shop_book.helper;
 
-import com.example.api_shop_book.mapper.BookMapper;
+import com.example.api_shop_book.dto.BookDTO;
 import com.example.api_shop_book.model.Book;
-import com.example.api_shop_book.payload.response.BookResponse;
-import com.example.api_shop_book.services.BookService;
+import com.example.api_shop_book.services.Impl.BookServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
 public class BookHelper {
+    @Autowired
+    private ModelMapper modelMapper;
+    private final BookServiceImpl bookService;
 
-    private final BookService bookService;
-
-    public ResponseEntity<Book> getBookById(Integer id) throws Exception {
+    public ResponseEntity<BookDTO> getBookById(Integer id) throws Exception {
         Book book = bookService.getBookId(id);
-        if (book != null) {
-            return ResponseEntity.ok(book);
-        }
-        return null;
+        BookDTO bookResponse = modelMapper.map(book, BookDTO.class);
+
+        return ResponseEntity.ok().body(bookResponse);
+//        if (book != null) {
+//            return ResponseEntity.ok(book);
+//        }
+//        return null;
     }
 
-    public ResponseEntity<?> getAllBook() {
-        List<Book> books = bookService.findAllBook();
+    public List<BookDTO> getAllBook() {
 
-        List<BookResponse> resp = books.stream()
-                .map(post -> BookMapper.toBookResp(post))
+
+        return bookService.findAllBook().stream().map(book -> modelMapper.map(book, BookDTO.class))
                 .collect(Collectors.toList());
-
-        return ResponseEntity.ok(resp);
     }
+//    public ResponseEntity<?> getAllBook() {
+//            List<Book> books = bookService.findAllBook();
+//
+//        List<BookResponse> resp = books.stream()
+//                .map(post -> BookMapper.toBookResp(post))
+//                .collect(Collectors.toList());
+//
+//        return ResponseEntity.ok(resp);
+//    }
 
 //    public ResponseEntity<List<Book>> getAllBook() {
 //        List<Book> book = bookService.findAllBook();
@@ -46,12 +55,10 @@ public class BookHelper {
 //        return null;
 //    }
 
-    public ResponseEntity<Book> getBookByName(String name) {
+    public ResponseEntity<BookDTO> getBookByName(String name) {
         Book book = bookService.getName(name);
-        if (book != null) {
-            return ResponseEntity.ok(book);
-        }
-        return null;
+        BookDTO bookResponse = modelMapper.map(book, BookDTO.class);
+        return ResponseEntity.ok().body(bookResponse);
     }
 
 //    public ResponseEntity<?> addBook(Book book) {

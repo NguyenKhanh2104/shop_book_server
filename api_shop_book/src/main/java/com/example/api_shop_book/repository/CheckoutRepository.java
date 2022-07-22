@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Repository
-public interface CheckoutRepo extends JpaRepository<CheckoutCart, Long> {
+public interface CheckoutRepository extends JpaRepository<CheckoutCart, Integer> {
 	@Query("Select checkCart  FROM CheckoutCart checkCart WHERE checkCart.user_id=:user_id")
 	List<CheckoutCart> getByuserId(@Param("user_id")Integer user_id);
 }

@@ -3,7 +3,7 @@ package com.example.api_shop_book.config;
 
 import com.example.api_shop_book.security.jwt.AuthEntryPointJwt;
 import com.example.api_shop_book.security.jwt.AuthTokenFilter;
-import com.example.api_shop_book.services.UserDetailsServiceImpl;
+import com.example.api_shop_book.services.Impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -58,9 +58,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
 //                .antMatchers("/api/addtocart/**").permitAll()
-                .antMatchers("/api/test/**").permitAll()
-                .antMatchers("/api/public/books/**").permitAll()
+//                .antMatchers("/api/test/**").permitAll()
+//                .antMatchers("/api/public/books/**").permitAll()
+                .antMatchers("/api/public/**").permitAll()
                 .antMatchers("/api/auth/**").permitAll();
+                http.authorizeRequests().antMatchers("/api/cart/**").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/api/order/**").access("hasRole('ROLE_USER')");
 //                .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
