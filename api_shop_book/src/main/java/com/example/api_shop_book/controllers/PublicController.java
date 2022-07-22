@@ -1,6 +1,7 @@
 package com.example.api_shop_book.controllers;
 
 import com.example.api_shop_book.helper.BookHelper;
+import com.example.api_shop_book.helper.UserHelper;
 import com.example.api_shop_book.model.AddtoCart;
 import com.example.api_shop_book.model.Book;
 import com.example.api_shop_book.payload.response.ApiResponse;
@@ -11,6 +12,7 @@ import com.example.api_shop_book.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -25,13 +27,17 @@ public class PublicController {
     CartService cartService;
     @Autowired
     private BookService bookService;
+    @Autowired
+    private UserHelper userHelper;
 
     @Autowired
     private UserService userService;
     @GetMapping("/all")
-    public ResponseEntity<?> getAllBook() {
+    public ResponseEntity<?> getAll() {
         return bookHelper.getAllBook();
+//        return userHelper.getAllUser();
     }
+
 
 
 
