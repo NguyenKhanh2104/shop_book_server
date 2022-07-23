@@ -10,7 +10,7 @@ import com.example.api_shop_book.payload.response.MessageResponse;
 import com.example.api_shop_book.repository.RoleRepository;
 import com.example.api_shop_book.repository.UserRepository;
 import com.example.api_shop_book.security.jwt.JwtUtils;
-import com.example.api_shop_book.services.UserDetailsImpl;
+import com.example.api_shop_book.services.Impl.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

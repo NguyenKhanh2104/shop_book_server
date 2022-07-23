@@ -4,16 +4,19 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity
 @Getter
 @Setter
 @Table(name="checkout")
-public class CheckoutCart {
+public class Checkout {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	long id;
+	Boolean status;
+	String note;
 	String order_id,payment_type,delivery_address;
 	Integer user_id;
 	@OneToOne(fetch=FetchType.LAZY)
@@ -22,9 +25,7 @@ public class CheckoutCart {
 	//long ;
 	int qty;
 	double price;
-	@Column(updatable=false, insertable=false)
-	String order_date;
-
+	Date order_date;
 	
 	
 }

@@ -3,21 +3,19 @@ package com.example.api_shop_book.helper;
 import com.example.api_shop_book.mapper.BookMapper;
 import com.example.api_shop_book.model.Book;
 import com.example.api_shop_book.payload.response.BookResponse;
-import com.example.api_shop_book.services.BookService;
+import com.example.api_shop_book.services.Impl.BookServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
 public class BookHelper {
 
-    private final BookService bookService;
+    private final BookServiceImpl bookService;
 
     public ResponseEntity<Book> getBookById(Integer id) throws Exception {
         Book book = bookService.getBookId(id);
