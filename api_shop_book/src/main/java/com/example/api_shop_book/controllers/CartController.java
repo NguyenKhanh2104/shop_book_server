@@ -22,7 +22,8 @@ import java.util.List;
 public class CartController {
     @Autowired
     CartService cartService;
-    @RequestMapping("addProduct")
+
+    @RequestMapping ("addProduct")
     public ResponseEntity<?> addCartwithProduct(@RequestBody HashMap<String,String> addCartRequest) {
         try {
             String keys[] = {"bookId","userId","qty","price"};
@@ -43,7 +44,8 @@ public class CartController {
 
     }
 
-    @RequestMapping("updateQtyForCart")
+
+    @RequestMapping ("updateQtyForCart")
     public ResponseEntity<?> updateQtyForCart(@RequestBody HashMap<String,String> addCartRequest) {
         try {
             String keys[] = {"cartId","userId","qty","price"};

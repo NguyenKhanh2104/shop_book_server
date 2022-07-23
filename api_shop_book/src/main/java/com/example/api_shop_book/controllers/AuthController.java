@@ -32,7 +32,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")
 public class AuthController {
-//	private final PostHelper postHelper;
 	@Autowired
 	AuthenticationManager authenticationManager;
 

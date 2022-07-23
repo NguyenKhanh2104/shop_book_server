@@ -33,6 +33,7 @@ public class CheckoutServiceImpl implements CheckoutService {
 
             if (tmp.size() > 0) {
                 checkoutRepo.saveAll(tmp);
+
                 cartService.removeAllCartByUserId(user_id);
                 return this.getAllCheckoutByUserId(user_id);
             } else {

@@ -22,7 +22,6 @@ public class Checkout {
 	@OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "book_id")
 	Book book;
-	//long ;
 	int qty;
 	double price;
 	Date order_date;
