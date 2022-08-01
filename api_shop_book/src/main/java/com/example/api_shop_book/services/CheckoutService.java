@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface CheckoutService {
      Boolean checkTotalAmountAgainstCart(double totalAmount, Integer userId);
-    List<Checkout> saveProductsForCheckout(List<Checkout> tmp) throws Exception;
+    Checkout saveProductsForCheckout(Checkout tmp) throws Exception;
      List<Checkout> getAllCheckoutByUserId(Integer userId);
-     List<Checkout> findByOrder_id(String order_id);
+     List<Checkout> listCheckout();
+     Checkout getById(long id);
 }

@@ -20,12 +20,6 @@ public class UserHelper {
     private final UserService userService;
 
     public ResponseEntity<?> getAllUser() {
-//        List<User> user = userService.findAllUser();
-//        if (user != null) {
-//            System.out.println(true);
-//            return ResponseEntity.ok(user);
-//        }
-//        return null;
         List<User> user = userService.findAllUser();
 
         List<UserResponse> resp = user.stream()

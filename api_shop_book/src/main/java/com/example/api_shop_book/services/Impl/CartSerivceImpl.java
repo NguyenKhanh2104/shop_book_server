@@ -18,10 +18,15 @@ public class CartSerivceImpl implements CartService {
     @Autowired
     AddToCartRepo addCartRepo;
     @Autowired
-    CheckoutRepository checkOutRepo;
+    CheckoutRepository checkoutRepo;
     @Autowired
     BookServiceImpl bookService;
     private static final Logger logger = LoggerFactory.getLogger(CartSerivceImpl.class);
+
+    @Override
+    public List<AddtoCart> findAll() {
+       return addCartRepo.findAll();
+    }
 
     @Override
     public List<AddtoCart> addCartbyUserIdAndBookId(Integer bookId, Integer userId, int qty, double price) throws Exception {
@@ -30,7 +35,7 @@ public class CartSerivceImpl implements CartService {
         try {
             if (addCartRepo.getCartByBookIdAnduserId(userId, bookId).isPresent()) {
                 AddtoCart a = addCartRepo.getCartByBookId(bookId);
-                addCartRepo.updateQtyByBookId(bookId, a.getBook().getPrice() * (a.getQty()+count), a.getQty() + count);
+                addCartRepo.updateQtyByBookId(bookId, a.getBook().getPrice() * (a.getQty() + count), a.getQty() + count);
             } else {
 
                 obj.setQty(qty);
@@ -55,8 +60,9 @@ public class CartSerivceImpl implements CartService {
 
     }
 
+    @Override
     public List<AddtoCart> getCartByUserId(Integer userId) {
-        return addCartRepo.getCartByuserId(userId);
+        return addCartRepo.getCartByUserId(userId);
     }
 
     @Override
@@ -64,6 +70,7 @@ public class CartSerivceImpl implements CartService {
         return addCartRepo.getCartByBookId(bookId);
     }
 
+    @Override
     public List<AddtoCart> removeCartByUserId(long cartId, Integer userId) {
         addCartRepo.deleteCartByIdAndUserId(userId, cartId);
         return this.getCartByUserId(userId);
@@ -83,6 +90,15 @@ public class CartSerivceImpl implements CartService {
     public List<AddtoCart> removeAllCartByUserId(Integer userId) {
         addCartRepo.deleteAllCartByUserId(userId);
         return null;
+    }
+
+    public static void main(String[] args) {
+        CartSerivceImpl cart = new CartSerivceImpl();
+       List<AddtoCart> list = cart.findAll();
+        for (AddtoCart add : list
+        ) {
+            System.out.println(add);
+        }
     }
 
 }

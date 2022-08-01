@@ -21,7 +21,6 @@ public class Book {
     @Lob
     @Column(name = "img")
     private String img;
-
     @Lob
     @Column(name = "description")
     private String description;
@@ -35,7 +34,7 @@ public class Book {
     @Column(name = "sale_price")
     private Double salePrice;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "category_id")
     private Category category;
 

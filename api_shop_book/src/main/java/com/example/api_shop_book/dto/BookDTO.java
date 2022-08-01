@@ -5,13 +5,13 @@ import lombok.Data;
 
 @Data
 public class BookDTO {
-    Integer id;
-     String name;
-    String img;
-    String description;
-    Boolean status;
-    Double price;
-    Double salePrice;
-    Category category;
-    String author;
+        Integer id;
+        String name;
+        String img;
+        String description;
+        Boolean status;
+        Double price;
+        Double salePrice;
+        String category;
+        String author;
 }

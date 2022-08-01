@@ -5,26 +5,27 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 
 @Entity
 @Getter
 @Setter
-@Table(name="checkout")
+@Table(name = "checkout")
 public class Checkout {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	long id;
-	Boolean status;
-	String note;
-	String order_id,payment_type,delivery_address;
-	Integer user_id;
-	@OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "book_id")
-	Book book;
-	int qty;
-	double price;
-	Date order_date;
-	
-	
+    @Id
+    @Column(name = "checkout_id")
+    long id;
+    @OneToMany(mappedBy = "checkout")
+    private List<Checkout_Item> checkoutItem;
+    Boolean status;
+    String note;
+    String payment_type, delivery_address;
+        Integer user_id;
+        double totalPrice;
+
+        Date dateCreate;
+
+
 }

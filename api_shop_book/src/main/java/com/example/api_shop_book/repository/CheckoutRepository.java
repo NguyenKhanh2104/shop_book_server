@@ -13,7 +13,5 @@ import java.util.List;
 public interface CheckoutRepository extends JpaRepository<Checkout, Long> {
 	@Query("Select checkCart  FROM Checkout checkCart WHERE checkCart.user_id=:user_id")
 	List<Checkout> getByuserId(@Param("user_id")Integer user_id);
-	@Query("Select checkCart  FROM Checkout checkCart WHERE checkCart.order_id=:order_id")
-	List<Checkout> findByorder_id(@Param("order_id")String order_id);
 
 }

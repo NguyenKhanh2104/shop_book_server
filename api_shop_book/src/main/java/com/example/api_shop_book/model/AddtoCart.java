@@ -17,7 +17,6 @@ public class AddtoCart {
     @Column(name = "id", nullable = false)
     long id;
 
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")
     Book book;
@@ -31,6 +30,7 @@ public class AddtoCart {
     String img;
     @Transient
     String bookName;
+
     public String getBookName() {
         return book.getName();
     }
@@ -40,6 +40,6 @@ public class AddtoCart {
     }
 
     public int updateQty(int add) {
-        return qty+=add;
+        return qty += add;
     }
 }

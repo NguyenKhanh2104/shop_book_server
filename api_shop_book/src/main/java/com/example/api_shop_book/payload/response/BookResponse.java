@@ -19,7 +19,6 @@ public class BookResponse {
     Double salePrice;
     String category;
     String author;
-    Date date;
 
 
 

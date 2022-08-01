@@ -16,6 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequiredArgsConstructor
@@ -33,24 +36,10 @@ public class PublicController {
     @GetMapping("/allBook")
     public List<BookDTO> getAllBook() {
         return bookHelper.getAllBook();
-//        return userHelper.getAllUser();
     }
     @GetMapping("/find/{id}")
     public ResponseEntity<BookDTO> getBookById(@PathVariable("id") Integer id) throws Exception {
         return bookHelper.getBookById(id);
-    }
-
-    @RequestMapping("getCartsByUserId")
-    public ResponseEntity<?> getCartsByUserId(@RequestBody HashMap<String,String> getCartRequest) {
-        try {
-            String keys[] = {"userId"};
-            if(ShoppingConfiguration.validationWithHashMap(keys, getCartRequest)) {
-            }
-            List<AddtoCart> obj = cartService.getCartByUserId(Integer.parseInt(getCartRequest.get("userId")));
-            return ResponseEntity.ok(obj);
-        }catch(Exception e) {
-            return ResponseEntity.badRequest().body(new ApiResponse(e.getMessage(), ""));
-        }
     }
 
 //
